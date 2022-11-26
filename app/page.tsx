@@ -5,25 +5,28 @@ import { useState } from "react";
 
 export default function Home() {
   const [palette, setPalette] = useState<string[]>([]);
+  const [cubePalette, setCubePalette] = useState<string[]>([]);
 
   const generatePalette = () => {
     const randomColor1 = chroma.random().hex();
     const randomColor2 = chroma.random().hex();
+    const randomColor3 = chroma.random().hex();
     const generatedPalette = chroma
-      .bezier([randomColor1, randomColor2])
+      .bezier([randomColor1, randomColor2, randomColor3])
+      // .bezier([randomColor1, randomColor2, randomColor3])
       .scale()
-      .colors(5);
+      .colors(30);
     setPalette(generatedPalette);
   };
 
   return (
     <div className="flex w-full h-screen justify-center items-center">
       <div>
-        <div className="flex">
+        <div className="flex w-[600px]">
           {palette.map((item) => {
             return (
               <div
-                className="min-w-[120px] min-h-[120px]"
+                className="w-[60px] h-[60px]"
                 style={{ backgroundColor: item }}
               ></div>
             );
